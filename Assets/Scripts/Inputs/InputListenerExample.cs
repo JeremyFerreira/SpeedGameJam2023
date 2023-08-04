@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InputListenerExample : MonoBehaviour
 {
     [SerializeField] private InputButtonScriptableObject _inputButton;
     [SerializeField] private InputVectorScriptableObject _inputVector;
+    public UnityEvent onButtonPressed;
+    public UnityEvent onVectorMoved;
 
     private void OnEnable()
     {
@@ -19,10 +22,10 @@ public class InputListenerExample : MonoBehaviour
     }
     private void ButtonMethod(bool value)
     {
-        Debug.Log(value);
+        onButtonPressed?.Invoke();
     }
     private void VectorMethod(Vector2 value)
     {
-        Debug.Log(value);
+        onVectorMoved?.Invoke();
     }
 }

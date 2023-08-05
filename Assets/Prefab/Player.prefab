@@ -752,7 +752,7 @@ MonoBehaviour:
   grappleDistanceVector: {x: 0, y: 0}
   inputToShoot: {fileID: 11400000, guid: b88ca25acd3ab9b47a6a89e192c4fd27, type: 2}
   inputDirection: {fileID: 11400000, guid: 7f7a427f3e6b19e47bafccce03714c01, type: 2}
-  balancingForce: 30
+  balancingForce: 15
 --- !u!1 &6894128199319428866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   grappleDistanceVector: {x: 0, y: 0}
   inputToShoot: {fileID: 11400000, guid: ef33b7b99850774419e93ef5cb471356, type: 2}
   inputDirection: {fileID: 11400000, guid: 34996b8e2c0828e4188d6c4a8a7d5ef4, type: 2}
-  balancingForce: 30
+  balancingForce: 15
 --- !u!1 &8415679536798624001
 GameObject:
   m_ObjectHideFlags: 0

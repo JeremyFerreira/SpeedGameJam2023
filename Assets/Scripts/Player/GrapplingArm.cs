@@ -127,7 +127,7 @@ public class GrapplingArm : MonoBehaviour
     {
         if (isGrappling)
         {
-            _rigidbody.AddForce(new Vector2(directionInput.x ,0) * balancingForce);
+            _rigidbody.AddForce(directionInput * balancingForce);
         }
     }
 

@@ -1,9 +1,11 @@
+using LootLocker.Requests;
+using System;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private float _actualTime;
-    public float GetTime {  get { return _actualTime; } }
+    private static float _actualTime;
+    public static float GetTime {  get { return _actualTime; } }
 
     private bool _isPlaying;
 

@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GrapplingArm : MonoBehaviour
@@ -52,12 +54,18 @@ public class GrapplingArm : MonoBehaviour
     [SerializeField] private InputVectorScriptableObject inputDirection;
     Vector2 directionInput;
     bool isGrappling;
+    bool grapplingInput;
     [SerializeField] float balancingForce;
+    bool nocatchyet = true;
+    private bool inCoroutineNoObject;
+
     void SetIsGrappling( bool value)
     {
-        isGrappling = value;
-        if (isGrappling)
+        grapplingInput = value;
+
+        if (grapplingInput)
         {
+            nocatchyet = true;
             StartGrappling();
         }
         else
@@ -90,11 +98,11 @@ public class GrapplingArm : MonoBehaviour
 
     void StartGrappling()
     {
-        SetGrapplePoint();
-        Debug.Log("grapple");
+        SetGrapplePointToPlatform();
     }
     void StopGrappling()
     {
+        isGrappling = false;
         grappleRope.enabled = false;
         _springJoint2D.enabled = false;
         _rigidbody.gravityScale = 1;
@@ -103,7 +111,6 @@ public class GrapplingArm : MonoBehaviour
     {
         if (isGrappling)
         {
-
             if (launchToPoint && grappleRope.isGrappling)
             {
                 if (launchType == LaunchType.Transform_Launch)
@@ -111,7 +118,6 @@ public class GrapplingArm : MonoBehaviour
                     Vector2 firePointDistnace = firePoint.position - Player.localPosition;
                     Vector2 targetPos = grapplePoint - firePointDistnace;
                     Player.position = Vector2.Lerp(Player.position, targetPos, Time.deltaTime * launchSpeed);
-                    
                 }
             }
         }
@@ -121,7 +127,7 @@ public class GrapplingArm : MonoBehaviour
     {
         if (isGrappling)
         {
-            _rigidbody.AddForce(new Vector2(directionInput.x ,0) * balancingForce);
+            _rigidbody.AddForce(directionInput * balancingForce);
         }
     }
 
@@ -130,9 +136,9 @@ public class GrapplingArm : MonoBehaviour
         shoulderPivot.transform.up = directionInput.normalized;
     }
 
-    void SetGrapplePoint()
+    void SetGrapplePointToPlatform()
     {
-        Vector2 distanceVector = shoulderPivot.position + shoulderPivot.transform.up * 100;
+        Vector2 distanceVector = shoulderPivot.transform.up;
         if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
@@ -143,47 +149,95 @@ public class GrapplingArm : MonoBehaviour
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
                     grappleRope.enabled = true;
+                    isGrappling = true;
+                    nocatchyet = false;
                 }
             }
         }
+        if(nocatchyet && !inCoroutineNoObject) { StartCoroutine(SetGrapplePointToNoObject()); }
+    }
+    IEnumerator SetGrapplePointToNoObject()
+    {
+        inCoroutineNoObject = true;
+        float timeToCancel = 0.4f;
+        grappleRope.enabled = true;
+        while (nocatchyet && grapplingInput && timeToCancel > 0)
+        {
+            grapplePoint = shoulderPivot.transform.position + shoulderPivot.transform.up * maxDistnace;
+            grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
+            
+            
+            timeToCancel -= Time.deltaTime;
+
+
+            //checkforSurfacetogarb
+
+            Vector2 distanceVector = shoulderPivot.transform.up;
+
+            if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
+            {
+                RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
+                if (_hit.transform.gameObject.layer == grappableLayerNumber || grappleToAll)
+                {
+                    if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
+                    {
+                        grapplePoint = _hit.point;
+                        grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
+                        isGrappling = true;
+                        nocatchyet = false;
+                        break;
+                    }
+                }
+            }
+            yield return null;
+        }
+        if(nocatchyet)
+        {
+            StopGrappling();
+        }
+        inCoroutineNoObject = false;
+
     }
 
     public void Grapple()
     {
-        _springJoint2D.autoConfigureDistance = false;
-        if (!launchToPoint && !autoConfigureDistance)
+        if (!nocatchyet)
         {
-            _springJoint2D.distance = targetDistance;
-            _springJoint2D.frequency = targetFrequncy;
-        }
-        if (!launchToPoint)
-        {
-            if (autoConfigureDistance)
+            _springJoint2D.autoConfigureDistance = false;
+            if (!launchToPoint && !autoConfigureDistance)
             {
-                _springJoint2D.autoConfigureDistance = true;
-                _springJoint2D.frequency = 0;
+                _springJoint2D.distance = targetDistance;
+                _springJoint2D.frequency = targetFrequncy;
             }
-
-            _springJoint2D.connectedAnchor = grapplePoint;
-            _springJoint2D.enabled = true;
-        }
-        else
-        {
-            switch (launchType)
+            if (!launchToPoint)
             {
-                case LaunchType.Physics_Launch:
-                    _springJoint2D.connectedAnchor = grapplePoint;
+                if (autoConfigureDistance)
+                {
+                    _springJoint2D.autoConfigureDistance = true;
+                    _springJoint2D.frequency = 0;
+                }
 
-                    Vector2 distanceVector = firePoint.position - Player.position;
+                _springJoint2D.connectedAnchor = grapplePoint;
+                _springJoint2D.enabled = true;
+            }
+            else
+            {
+                switch (launchType)
+                {
+                    case LaunchType.Physics_Launch:
+                        _springJoint2D.connectedAnchor = grapplePoint;
 
-                    _springJoint2D.distance = distanceVector.magnitude;
-                    _springJoint2D.frequency = launchSpeed;
-                    _springJoint2D.enabled = true;
-                    break;
-                case LaunchType.Transform_Launch:
-                    _rigidbody.gravityScale = 0;
-                    _rigidbody.velocity = Vector2.zero;
-                    break;
+                        Vector2 distanceVector = firePoint.position - Player.position;
+
+                        _springJoint2D.distance = distanceVector.magnitude;
+                        _springJoint2D.frequency = launchSpeed;
+                        _springJoint2D.enabled = true;
+                        break;
+                    case LaunchType.Transform_Launch:
+                        _rigidbody.gravityScale = 0;
+                        _rigidbody.velocity = Vector2.zero;
+                        break;
+                }
             }
         }
     }

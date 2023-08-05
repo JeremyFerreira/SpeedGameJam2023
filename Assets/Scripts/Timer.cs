@@ -1,13 +1,19 @@
-using LootLocker.Requests;
-using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
-    private static float _actualTime;
-    public static float GetTime {  get { return _actualTime; } }
+    private float _actualTime;
+    public UnityEvent<float> OnValueChange;
+    public float GetTime {  get { return _actualTime; } }
 
     private bool _isPlaying;
+
+    private void Start()
+    {
+        StartTimer();
+    }
 
     public void StartTimer ()
     {
@@ -20,7 +26,7 @@ public class Timer : MonoBehaviour
         _isPlaying = false;
     }
 
-    public void RestartTimer ()
+    public void ResumeTimer ()
     {
         _isPlaying = true;
     }
@@ -34,10 +40,7 @@ public class Timer : MonoBehaviour
         if (_isPlaying)
         {
             _actualTime += Time.deltaTime;
+            OnValueChange?.Invoke(_actualTime);
         }
     }
-
-
-
-
 }

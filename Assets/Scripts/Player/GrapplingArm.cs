@@ -53,11 +53,13 @@ public class GrapplingArm : MonoBehaviour
     Vector2 directionInput;
     bool isGrappling;
     [SerializeField] float balancingForce;
+    bool nocatchyet = false;
     void SetIsGrappling( bool value)
     {
         isGrappling = value;
         if (isGrappling)
         {
+            isGrappling = false;
             StartGrappling();
         }
         else
@@ -90,7 +92,7 @@ public class GrapplingArm : MonoBehaviour
 
     void StartGrappling()
     {
-        SetGrapplePoint();
+        SetGrapplePointToPlatform();
         Debug.Log("grapple");
     }
     void StopGrappling()
@@ -116,6 +118,8 @@ public class GrapplingArm : MonoBehaviour
             }
         }
         RotateGun();
+
+        if(nocatchyet) { SetGrapplePointToNoObject(); }
     }
     private void FixedUpdate()
     {
@@ -130,9 +134,9 @@ public class GrapplingArm : MonoBehaviour
         shoulderPivot.transform.up = directionInput.normalized;
     }
 
-    void SetGrapplePoint()
+    void SetGrapplePointToPlatform()
     {
-        Vector2 distanceVector = shoulderPivot.position + shoulderPivot.transform.up * 100;
+        Vector2 distanceVector = shoulderPivot.transform.up;
         if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
@@ -143,9 +147,20 @@ public class GrapplingArm : MonoBehaviour
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
                     grappleRope.enabled = true;
+                    isGrappling = true;
                 }
             }
         }
+        if(!isGrappling)
+        {
+            nocatchyet = true;
+        }
+    }
+    void SetGrapplePointToNoObject()
+    {
+        grapplePoint = shoulderPivot.transform.position + shoulderPivot.transform.up * maxDistnace;
+        grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
+        grappleRope.enabled = true;
     }
 
     public void Grapple()

@@ -53,6 +53,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateRightArm"",
+                    ""type"": ""Value"",
+                    ""id"": ""9372b944-03a7-4cfc-915a-38b030caa3c9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RotateLeftArm"",
+                    ""type"": ""Value"",
+                    ""id"": ""d87be435-1158-47b2-a8dc-5f4d8eaa2e80"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GrabRightArm"",
+                    ""type"": ""Button"",
+                    ""id"": ""15c1337d-657a-4cc2-a84b-5f90c1d9818d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GrabLeftArm"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d370f36-886c-4273-8784-09c495112a8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +201,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9f73801-52ab-4ea3-ada9-bbff663cbbdf"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRightArm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f14fa37-85ed-4d63-ac9d-7bba73f2a710"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrabRightArm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4611d4ce-4e86-4662-ac91-1092df041166"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeftArm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74d2f589-8ccb-424f-a1cc-272c586adc66"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrabLeftArm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -182,6 +262,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
         m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
         m_Game_Pause = m_Game.FindAction("Pause", throwIfNotFound: true);
+        m_Game_RotateRightArm = m_Game.FindAction("RotateRightArm", throwIfNotFound: true);
+        m_Game_RotateLeftArm = m_Game.FindAction("RotateLeftArm", throwIfNotFound: true);
+        m_Game_GrabRightArm = m_Game.FindAction("GrabRightArm", throwIfNotFound: true);
+        m_Game_GrabLeftArm = m_Game.FindAction("GrabLeftArm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +330,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Move;
     private readonly InputAction m_Game_Jump;
     private readonly InputAction m_Game_Pause;
+    private readonly InputAction m_Game_RotateRightArm;
+    private readonly InputAction m_Game_RotateLeftArm;
+    private readonly InputAction m_Game_GrabRightArm;
+    private readonly InputAction m_Game_GrabLeftArm;
     public struct GameActions
     {
         private @PlayerControls m_Wrapper;
@@ -253,6 +341,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Game_Move;
         public InputAction @Jump => m_Wrapper.m_Game_Jump;
         public InputAction @Pause => m_Wrapper.m_Game_Pause;
+        public InputAction @RotateRightArm => m_Wrapper.m_Game_RotateRightArm;
+        public InputAction @RotateLeftArm => m_Wrapper.m_Game_RotateLeftArm;
+        public InputAction @GrabRightArm => m_Wrapper.m_Game_GrabRightArm;
+        public InputAction @GrabLeftArm => m_Wrapper.m_Game_GrabLeftArm;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -271,6 +363,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @RotateRightArm.started += instance.OnRotateRightArm;
+            @RotateRightArm.performed += instance.OnRotateRightArm;
+            @RotateRightArm.canceled += instance.OnRotateRightArm;
+            @RotateLeftArm.started += instance.OnRotateLeftArm;
+            @RotateLeftArm.performed += instance.OnRotateLeftArm;
+            @RotateLeftArm.canceled += instance.OnRotateLeftArm;
+            @GrabRightArm.started += instance.OnGrabRightArm;
+            @GrabRightArm.performed += instance.OnGrabRightArm;
+            @GrabRightArm.canceled += instance.OnGrabRightArm;
+            @GrabLeftArm.started += instance.OnGrabLeftArm;
+            @GrabLeftArm.performed += instance.OnGrabLeftArm;
+            @GrabLeftArm.canceled += instance.OnGrabLeftArm;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -284,6 +388,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @RotateRightArm.started -= instance.OnRotateRightArm;
+            @RotateRightArm.performed -= instance.OnRotateRightArm;
+            @RotateRightArm.canceled -= instance.OnRotateRightArm;
+            @RotateLeftArm.started -= instance.OnRotateLeftArm;
+            @RotateLeftArm.performed -= instance.OnRotateLeftArm;
+            @RotateLeftArm.canceled -= instance.OnRotateLeftArm;
+            @GrabRightArm.started -= instance.OnGrabRightArm;
+            @GrabRightArm.performed -= instance.OnGrabRightArm;
+            @GrabRightArm.canceled -= instance.OnGrabRightArm;
+            @GrabLeftArm.started -= instance.OnGrabLeftArm;
+            @GrabLeftArm.performed -= instance.OnGrabLeftArm;
+            @GrabLeftArm.canceled -= instance.OnGrabLeftArm;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -315,5 +431,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnRotateRightArm(InputAction.CallbackContext context);
+        void OnRotateLeftArm(InputAction.CallbackContext context);
+        void OnGrabRightArm(InputAction.CallbackContext context);
+        void OnGrabLeftArm(InputAction.CallbackContext context);
     }
 }

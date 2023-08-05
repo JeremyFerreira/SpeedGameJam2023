@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
@@ -6,6 +7,8 @@ public class Timer : MonoBehaviour
     public float GetTime {  get { return _actualTime; } }
 
     private bool _isPlaying;
+
+
 
     public void StartTimer ()
     {
@@ -18,7 +21,7 @@ public class Timer : MonoBehaviour
         _isPlaying = false;
     }
 
-    public void RestartTimer ()
+    public void ResumeTimer ()
     {
         _isPlaying = true;
     }
@@ -34,8 +37,4 @@ public class Timer : MonoBehaviour
             _actualTime += Time.deltaTime;
         }
     }
-
-
-
-
 }

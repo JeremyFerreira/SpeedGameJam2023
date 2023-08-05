@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(CameraShakeScriptableObject))]
 public class CameraShakeScriptableObjectEditor : Editor
 {
@@ -21,3 +22,4 @@ public class CameraShakeScriptableObjectEditor : Editor
     }
 
 }
+#endif

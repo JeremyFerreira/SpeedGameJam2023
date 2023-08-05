@@ -58,6 +58,7 @@ public class GrapplingArm : MonoBehaviour
     [SerializeField] float balancingForce;
     bool nocatchyet = true;
     private bool inCoroutineNoObject;
+    
 
     void SetIsGrappling( bool value)
     {
@@ -161,6 +162,7 @@ public class GrapplingArm : MonoBehaviour
         inCoroutineNoObject = true;
         float timeToCancel = 0.4f;
         grappleRope.enabled = true;
+        bool hasgrabbed = false;
         while (nocatchyet && grapplingInput && timeToCancel > 0)
         {
             grapplePoint = shoulderPivot.transform.position + shoulderPivot.transform.up * maxDistnace;
@@ -185,13 +187,15 @@ public class GrapplingArm : MonoBehaviour
                         grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
                         isGrappling = true;
                         nocatchyet = false;
-                        break;
+                        hasgrabbed = true;
+                        grappleRope.enabled = true;
+                        grappleRope.startGrab();
                     }
                 }
             }
             yield return null;
         }
-        if(nocatchyet)
+        if(nocatchyet && !hasgrabbed)
         {
             StopGrappling();
         }

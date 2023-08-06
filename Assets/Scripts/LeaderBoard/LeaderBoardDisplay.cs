@@ -106,7 +106,10 @@ public class LeaderBoardDisplay : MonoBehaviour
             GameObject container = Instantiate(_prefabContainer, _parentContainer);
             ContainerScore containerScore = container.GetComponent<ContainerScore>();
             string playerId = _leaderDic.ElementAt(i).Key.Split('/')[1];
-            containerScore.InitilizeContainerScore(playerId, _leaderDic.ElementAt(i).Value.ToString(), (i+1).ToString());
+            Debug.Log(_leaderDic.ElementAt(i).Value);
+            Debug.Log(_leaderDic.ElementAt(i).Value / 100f);
+            float time = _leaderDic.ElementAt(i).Value / 100f;
+            containerScore.InitilizeContainerScore(playerId, time.ToString(), (i+1).ToString());
             containers.Add(container);
         }
         _leaderBoardSuccessDisplay?.Invoke();
@@ -119,7 +122,10 @@ public class LeaderBoardDisplay : MonoBehaviour
         _panelSubmition.SetActive(true);
         Debug.Log(LeaderBoardUtility.PlayerName +" EEEEEEEEEEEEEEEEEEEe");
         _textPlayerId.text = LeaderBoardUtility.PlayerName;
-        _textScore.text = Timer.GetTime.ToString();
+
+        float score = Mathf.RoundToInt(Timer.GetTime * 100);
+        score /= 100;
+        _textScore.text = score.ToString();
 
     }
 
@@ -130,7 +136,7 @@ public class LeaderBoardDisplay : MonoBehaviour
 
     public void SubmitScore ()
     {
-        int score = (int)Timer.GetTime;
+        int score = Mathf.RoundToInt(Timer.GetTime * 100);
         string id;
         if (LeaderBoardUtility.PlayerName == "") { id = LeaderBoardUtility.PlayerID.ToString(); }
         else { id = LeaderBoardUtility.PlayerName; }//+ random entre 100 et 999; }

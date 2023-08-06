@@ -30,6 +30,8 @@ public class LeaderBoardDisplay : MonoBehaviour
     private GameObject _panelSubmition;
     [SerializeField]
     private TMP_InputField _textPlayerId;
+    [SerializeField]
+    private TextMeshProUGUI _textScore;
 
     [SerializeField]
     private UnityEvent _submittedScoreSuccess;
@@ -41,19 +43,32 @@ public class LeaderBoardDisplay : MonoBehaviour
     [SerializeField]
     private UnityEvent _changeNameFail;
 
+    [SerializeField]
+    private GameObject _panelLeaderBoard;
+
+
+    public void UnShowPanelLeaderBoard ()
+    {
+        if (!LeaderBoardUtility.IsConnected) { _leaderBoardFailDisplay?.Invoke(); }
+        _panelLeaderBoard.SetActive(false);
+        UnShowSubmitLeaderBoard();
+        _parentContainer.gameObject.SetActive(false);
+    }
 
     public void ShowPanelLeaderBoard (bool showSubmit)
     {
-        if (showSubmit) { _panelSubmition.SetActive(true); }
-        _parentContainer.gameObject.SetActive(true);
+        _panelLeaderBoard.SetActive(true);
+        if (showSubmit) { ShowSubmitLeaderBoard(); }
+        ShowLeaderBoard();
     }
 
     public void ShowLeaderBoard ()
     {
         if (!LeaderBoardUtility.IsConnected) { return; }
         _parentContainer.gameObject.SetActive(true);
-        _actionGetLeaderBoard += GetLeaderBoard;
         DestroyAllContainers();
+        _actionGetLeaderBoard += GetLeaderBoard;
+        
         LeaderBoardUtility.GetLeaderBoard(_actionGetLeaderBoard);
         
     }
@@ -84,7 +99,7 @@ public class LeaderBoardDisplay : MonoBehaviour
         for (int i = 0; i< _leaderDic.Count;i++)
         {
             ContainerScore containerScore = Instantiate(_prefabContainer, _parentContainer).GetComponent<ContainerScore>();
-            containerScore.InitilizeContainerScore(_leaderDic.ElementAt(i).Key,_leaderDic.ElementAt(i).Value.ToString());
+            containerScore.InitilizeContainerScore(_leaderDic.ElementAt(i).Key,_leaderDic.ElementAt(i).Value.ToString(), (i+1).ToString());
             containers.Add(containerScore.gameObject);
         }
         _leaderBoardSuccessDisplay?.Invoke();
@@ -95,8 +110,9 @@ public class LeaderBoardDisplay : MonoBehaviour
         if (!LeaderBoardUtility.IsConnected) { return; }
         
         _panelSubmition.SetActive(true);
-        _textPlayerId.text = LeaderBoardUtility.PlayerName.ToString();
-
+        Debug.Log(LeaderBoardUtility.PlayerName +" EEEEEEEEEEEEEEEEEEEe");
+        _textPlayerId.text = LeaderBoardUtility.PlayerName;
+        _textScore.text = Timer.GetTime.ToString();
 
     }
 
@@ -107,7 +123,7 @@ public class LeaderBoardDisplay : MonoBehaviour
 
     public void SubmitScore ()
     {
-        int score = 250;
+        int score = (int)Timer.GetTime;
         string id;
         if (LeaderBoardUtility.PlayerName == "") { id = LeaderBoardUtility.PlayerID.ToString(); }
         else { id = LeaderBoardUtility.PlayerName; }//+ random entre 100 et 999; }

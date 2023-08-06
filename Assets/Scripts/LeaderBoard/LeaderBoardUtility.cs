@@ -87,7 +87,8 @@ public static class LeaderBoardUtility
     public static void GetLeaderBoard (Action<Dictionary<string, int>> toReturn)
     {
         Dictionary<string,int> listLeader = new Dictionary<string,int>();
-        LootLockerSDKManager.GetScoreList(_leaderBoardKey, 10, 0, (response) =>
+
+        LootLockerSDKManager.GetScoreList(_leaderBoardKey, 100, 0, (response) =>
         {
             if (response.statusCode == 200)
             {

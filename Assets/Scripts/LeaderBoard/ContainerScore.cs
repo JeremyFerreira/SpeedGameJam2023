@@ -9,10 +9,13 @@ public class ContainerScore : MonoBehaviour
     private TextMeshProUGUI _playerId;
     [SerializeField]
     private TextMeshProUGUI _playerScore;
+    [SerializeField]
+    private TextMeshProUGUI _playerRank;
 
-    public void InitilizeContainerScore (string playerId, string playerScore)
+    public void InitilizeContainerScore (string playerId, string playerScore, string rank)
     {
         _playerId.text = playerId;
         _playerScore.text = playerScore;
+        _playerRank.text = rank;
     }
 }

@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 7841200074118733955}
   - component: {fileID: 1017023773924366111}
   - component: {fileID: 332699602831236526}
+  - component: {fileID: 972061298283413528}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -540,7 +541,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1752892426807739053}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 079cfd7ef2be6de43bc41a040f567695, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -608,6 +609,22 @@ SpringJoint2D:
   m_Distance: 22.900217
   m_DampingRatio: 1
   m_Frequency: 100
+--- !u!114 &972061298283413528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752892426807739053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0fdaef890ced240ae09fa10dde1c95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 30
+  percentageSpeed: 0
+  rb: {fileID: 4666012040681886676}
+  percentageSpeedData: {fileID: 11400000, guid: a38b197caaaa22e4695b7fa0bfc27f36, type: 2}
 --- !u!1 &2050188843183227691
 GameObject:
   m_ObjectHideFlags: 0

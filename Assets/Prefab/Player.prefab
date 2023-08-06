@@ -540,7 +540,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1752892426807739053}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 079cfd7ef2be6de43bc41a040f567695, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -584,7 +584,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 22.900217
+  m_Distance: 0.005
   m_DampingRatio: 1
   m_Frequency: 1
 --- !u!231 &332699602831236526
@@ -605,7 +605,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 22.900217
+  m_Distance: 0.005
   m_DampingRatio: 1
   m_Frequency: 100
 --- !u!1 &2050188843183227691

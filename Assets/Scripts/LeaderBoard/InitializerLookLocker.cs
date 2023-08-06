@@ -22,7 +22,12 @@ public class InitializerLookLocker : MonoBehaviour
     {
         if(LeaderBoardUtility.IsConnected)
         {
-            _sessionSuccess?.Invoke();
+            LeaderBoardUtility.GetPlayerName((response) =>
+            {
+                if(response) { _sessionSuccess?.Invoke(); }
+                else { _sessionSuccess?.Invoke(); }
+                
+            });
         }
         else
         {

@@ -12,6 +12,10 @@ public class LeaderBoardDisplay : MonoBehaviour
 
     private Action<Dictionary<string, int>> _actionGetLeaderBoard;
 
+    private Action<bool> _changeName;
+
+    List<GameObject> containers;
+
     [SerializeField]
     private GameObject _prefabContainer;
     [SerializeField]
@@ -32,14 +36,37 @@ public class LeaderBoardDisplay : MonoBehaviour
     [SerializeField]
     private UnityEvent _submittedScoreFail;
 
+    [SerializeField]
+    private UnityEvent _changeNameSucess;
+    [SerializeField]
+    private UnityEvent _changeNameFail;
+
+
+    public void ShowPanelLeaderBoard (bool showSubmit)
+    {
+        if (showSubmit) { _panelSubmition.SetActive(true); }
+        _parentContainer.gameObject.SetActive(true);
+    }
+
     public void ShowLeaderBoard ()
     {
         if (!LeaderBoardUtility.IsConnected) { return; }
         _parentContainer.gameObject.SetActive(true);
         _actionGetLeaderBoard += GetLeaderBoard;
-
+        DestroyAllContainers();
         LeaderBoardUtility.GetLeaderBoard(_actionGetLeaderBoard);
         
+    }
+
+    private void DestroyAllContainers ()
+    {
+        if(containers != null)
+        {
+            for(int i = 0;i <  containers.Count;i++)
+            {
+                Destroy(containers[i]);
+            }
+        }
     }
 
     private void GetLeaderBoard (Dictionary<string, int> newDic)
@@ -49,12 +76,16 @@ public class LeaderBoardDisplay : MonoBehaviour
         SpawnContainer();
     }
 
+
+
     private void SpawnContainer ()
     {
-        for(int i = 0; i< _leaderDic.Count;i++)
+        containers = new List<GameObject>();
+        for (int i = 0; i< _leaderDic.Count;i++)
         {
             ContainerScore containerScore = Instantiate(_prefabContainer, _parentContainer).GetComponent<ContainerScore>();
             containerScore.InitilizeContainerScore(_leaderDic.ElementAt(i).Key,_leaderDic.ElementAt(i).Value.ToString());
+            containers.Add(containerScore.gameObject);
         }
         _leaderBoardSuccessDisplay?.Invoke();
     }
@@ -64,7 +95,7 @@ public class LeaderBoardDisplay : MonoBehaviour
         if (!LeaderBoardUtility.IsConnected) { return; }
         
         _panelSubmition.SetActive(true);
-        _textPlayerId.text = LeaderBoardUtility.PlayerID.ToString();
+        _textPlayerId.text = LeaderBoardUtility.PlayerName.ToString();
 
 
     }
@@ -79,7 +110,7 @@ public class LeaderBoardDisplay : MonoBehaviour
         int score = 250;
         string id;
         if (LeaderBoardUtility.PlayerName == "") { id = LeaderBoardUtility.PlayerID.ToString(); }
-        else { id = LeaderBoardUtility.PlayerName; }
+        else { id = LeaderBoardUtility.PlayerName; }//+ random entre 100 et 999; }
         Debug.Log(id);
        
         //Recuper le score
@@ -96,9 +127,24 @@ public class LeaderBoardDisplay : MonoBehaviour
         });
     }
 
-    public void ChangePlayerID (string playerID)
+    public void ChangePlayerName (string playernName)
     {
-        LeaderBoardUtility.PlayerName = playerID;
+        _changeName += NameChanged;
+        LeaderBoardUtility.ChangePlayerName(playernName, _changeName);
+    }
+
+    private void NameChanged (bool isChange)
+    {
+        _changeName -= NameChanged;
+        if (isChange)
+        {
+            Debug.Log("mon nom est changer");
+            _changeNameSucess?.Invoke();
+        }
+        else
+        {
+            _changeNameFail?.Invoke();
+        }
     }
 
     

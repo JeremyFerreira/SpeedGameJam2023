@@ -14,6 +14,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private InputButtonScriptableObject _grabLeftArm;
     [SerializeField] private InputVectorScriptableObject _rotateLeftArm;
     [SerializeField] private InputButtonScriptableObject _pause;
+    [SerializeField] private InputButtonScriptableObject _resume;
+    [SerializeField] private InputButtonScriptableObject _anyKey;
     private bool _isGamepad { get; set; }
     void Awake()
     {
@@ -29,16 +31,45 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         EnableGameInput();
+        _input.UI.Enable();
+        _input.UI.AnyKey.performed += ctx => _anyKey.ChangeValue(true);
+        _input.UI.Resume.performed += ctx => _resume.ChangeValue(true);
+        _input.UI.Resume.canceled += ctx => _resume.ChangeValue(false);
     }
     private void OnDisable()
     {
+        _input.UI.AnyKey.performed -= ctx => _anyKey.ChangeValue(true);
+        _input.UI.Resume.performed -= ctx => _resume.ChangeValue(true);
+        _input.UI.Resume.canceled -= ctx => _resume.ChangeValue(false);
+        _input.UI.Disable();
         DisableGameInput();
+    }
+    public void ActiveGameInputs(bool value)
+    {
+        _grabRightArm.IsActive = value;
+        _rotateRightArm.IsActive = value;
+        _pause.IsActive = value;
+        _rotateLeftArm.IsActive = value;
+        _grabLeftArm.IsActive = value;
+
+        if (value)
+        {
+            _input.UI.AnyKey.performed -= ctx => _anyKey.ChangeValue(true);
+            _input.UI.Resume.performed -= ctx => _resume.ChangeValue(true);
+            _input.UI.Resume.canceled -= ctx => _resume.ChangeValue(false);
+            _input.UI.Disable();
+        }
+        else
+        {
+            _input.UI.Enable();
+            _input.UI.AnyKey.performed += ctx => _anyKey.ChangeValue(true);
+            _input.UI.Resume.performed += ctx => _resume.ChangeValue(true);
+            _input.UI.Resume.canceled += ctx => _resume.ChangeValue(false);
+        }
     }
     public void EnableGameInput()
     {
-        _input.Enable();
-
-        
+        _input.Game.Enable();
 
         //RightARm
         //Rotate
@@ -77,7 +108,7 @@ public class InputManager : MonoBehaviour
         _input.Game.Pause.canceled -= ctx => _pause.ChangeValue(false);
 
 
-        _input.Disable();
+        _input.Game.Disable();
     }
     private void Update()
     {

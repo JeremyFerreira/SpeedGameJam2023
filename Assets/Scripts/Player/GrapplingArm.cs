@@ -58,6 +58,8 @@ public class GrapplingArm : MonoBehaviour
     [SerializeField] float balancingForce;
     bool nocatchyet = true;
     private bool inCoroutineNoObject;
+    public Transform grabPointMoving;
+    
 
     void SetIsGrappling( bool value)
     {
@@ -70,6 +72,10 @@ public class GrapplingArm : MonoBehaviour
         }
         else
         {
+            if(isGrappling)
+            {
+                _rigidbody.AddForce((new Vector2(shoulderPivot.transform.position.x, shoulderPivot.transform.position.y) - grapplePoint).normalized * 10, ForceMode2D.Impulse);
+            }
             StopGrappling();
         }
     }
@@ -122,6 +128,10 @@ public class GrapplingArm : MonoBehaviour
             }
         }
         RotateGun();
+        if(isGrappling && grabPointMoving.transform.parent != null && !grabPointMoving.transform.parent.gameObject.activeSelf)
+        {
+            SetIsGrappling(false);
+        }
     }
     private void FixedUpdate()
     {
@@ -151,16 +161,45 @@ public class GrapplingArm : MonoBehaviour
                     grappleRope.enabled = true;
                     isGrappling = true;
                     nocatchyet = false;
+                    grabPointMoving.position = _hit.point;
+                    grabPointMoving.parent = _hit.collider.gameObject.transform;
+
+                }
+            }
+            //movingPlatform
+            if (_hit.transform.gameObject.layer == 8)
+            {
+                if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
+                {
+                    grapplePoint = _hit.point;
+                    grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
+                    grappleRope.enabled = true;
+                    isGrappling = true;
+                    nocatchyet = false;
+                    grabPointMoving.position = _hit.point;
+                    grabPointMoving.parent = _hit.collider.gameObject.transform;
+                    StartCoroutine(MovingGrabPoint());
                 }
             }
         }
         if(nocatchyet && !inCoroutineNoObject) { StartCoroutine(SetGrapplePointToNoObject()); }
+    }
+    IEnumerator MovingGrabPoint()
+    {
+        while (isGrappling)
+        {
+            grapplePoint = grabPointMoving.position;
+            Grapple();
+            yield return null;
+        }
+        grabPointMoving.parent = null;
     }
     IEnumerator SetGrapplePointToNoObject()
     {
         inCoroutineNoObject = true;
         float timeToCancel = 0.4f;
         grappleRope.enabled = true;
+        bool hasgrabbed = false;
         while (nocatchyet && grapplingInput && timeToCancel > 0)
         {
             grapplePoint = shoulderPivot.transform.position + shoulderPivot.transform.up * maxDistnace;
@@ -185,13 +224,37 @@ public class GrapplingArm : MonoBehaviour
                         grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
                         isGrappling = true;
                         nocatchyet = false;
-                        break;
+                        hasgrabbed = true;
+                        grappleRope.enabled = true;
+                        grappleRope.startGrab();
+                    }
+                }
+                //movingPlatform
+                if (_hit.transform.gameObject.layer == 8)
+                {
+                    if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
+                    {
+                        grapplePoint = _hit.point;
+                        grappleDistanceVector = grapplePoint - (Vector2)shoulderPivot.position;
+                        grappleRope.enabled = true;
+                        isGrappling = true;
+                        nocatchyet = false;
+                        grabPointMoving.position = _hit.point;
+                        grabPointMoving.parent = _hit.collider.gameObject.transform;
+
+
+                        hasgrabbed = true;
+                        grappleRope.enabled = true;
+                        grappleRope.startGrab();
+
+                        StartCoroutine(MovingGrabPoint());
                     }
                 }
             }
+
             yield return null;
         }
-        if(nocatchyet)
+        if(nocatchyet && !hasgrabbed)
         {
             StopGrappling();
         }

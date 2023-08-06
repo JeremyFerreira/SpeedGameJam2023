@@ -24,6 +24,8 @@ public class ArmRenderer : MonoBehaviour
     [HideInInspector] public bool isGrappling = true;
 
     bool strightLine = true;
+    [SerializeField] Transform handBasePosition;
+    [SerializeField] Transform hand;
 
     private void OnEnable()
     {
@@ -36,11 +38,20 @@ public class ArmRenderer : MonoBehaviour
 
         m_lineRenderer.enabled = true;
     }
+    public void startGrab()
+    {
+        grapplingGun.Grapple();
+        isGrappling = true;
+    }
 
     private void OnDisable()
     {
         m_lineRenderer.enabled = false;
         isGrappling = false;
+
+        hand.transform.parent = handBasePosition.transform;
+        hand.transform.position = handBasePosition.position;
+        hand.transform.right = handBasePosition.up;
     }
 
     private void LinePointsToFirePoint()
@@ -55,6 +66,11 @@ public class ArmRenderer : MonoBehaviour
     {
         moveTime += Time.deltaTime;
         DrawRope();
+        if(m_lineRenderer.positionCount > 0 && (isGrappling||m_lineRenderer.enabled))
+        {
+            hand.transform.parent = null;
+            hand.transform.position = m_lineRenderer.GetPosition(m_lineRenderer.positionCount - 1);
+        }
     }
 
     void DrawRope()

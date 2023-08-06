@@ -105,7 +105,8 @@ public class LeaderBoardDisplay : MonoBehaviour
         {
             GameObject container = Instantiate(_prefabContainer, _parentContainer);
             ContainerScore containerScore = container.GetComponent<ContainerScore>();
-            containerScore.InitilizeContainerScore(_leaderDic.ElementAt(i).Key,_leaderDic.ElementAt(i).Value.ToString(), (i+1).ToString());
+            string playerId = _leaderDic.ElementAt(i).Key.Split('/')[1];
+            containerScore.InitilizeContainerScore(playerId, _leaderDic.ElementAt(i).Value.ToString(), (i+1).ToString());
             containers.Add(container);
         }
         _leaderBoardSuccessDisplay?.Invoke();

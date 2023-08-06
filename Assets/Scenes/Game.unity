@@ -1006,46 +1006,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 420883750}
-    - target: {fileID: 1381814219436788045, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_Pivot.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109376081733110783, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5769232661184990068, guid: b71b782052868514a93b5c7477fbc201, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1125,34 +1085,6 @@ PrefabInstance:
     - target: {fileID: 5769232661184990068, guid: b71b782052868514a93b5c7477fbc201, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782817104523369392, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782817104523369392, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_margin.z
-      value: 0.1576844
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782817104523369392, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_fontStyle
-      value: 33
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782817104523369392, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782817104523369392, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782817104523369392, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_enableWordWrapping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6782817104523369392, guid: b71b782052868514a93b5c7477fbc201, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7620228523055262282, guid: b71b782052868514a93b5c7477fbc201, type: 3}
       propertyPath: m_Name

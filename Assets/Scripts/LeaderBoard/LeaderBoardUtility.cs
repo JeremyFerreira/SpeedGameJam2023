@@ -117,7 +117,7 @@ public static class LeaderBoardUtility
                     {
                         for (int i = 0; i < responseName.players.Length; i++)
                         {
-                            listLeaderName.Add(responseName.players[i].name, listLeader.ElementAt(i).Value);
+                            listLeaderName.Add(listLeader.ElementAt(i).Key + "/"+responseName.players[i].name, listLeader.ElementAt(i).Value);
                         }
 
                         toReturn?.Invoke(listLeaderName);

@@ -30,6 +30,7 @@ public static class LeaderBoardUtility
             {
                 _playerID = response.player_id;
                 _isConnected = true;
+               
                 toinvoke?.Invoke();
             }
             else
@@ -112,7 +113,7 @@ public static class LeaderBoardUtility
 
     private static Action<LootLockerPlayerFilesResponse> requestPlayerFile;
 
-    public static void ChangePlayerName (string newPlayerName)
+    public static void ChangePlayerNametst (string newPlayerName)
     {
         requestPlayerFile += ReceveReponsePlayerFile;
         LootLockerSDKManager.GetAllPlayerFiles(_playerID, requestPlayerFile);
@@ -128,6 +129,60 @@ public static class LeaderBoardUtility
             Debug.Log(reponsePlayerFile.items[i].id);
             Debug.Log(reponsePlayerFile.items[i].revision_id);
         }
+    }
+
+
+    public static void ChangePlayerName (string newPlayerName, Action<bool> responseName)
+    {
+        LootLockerSDKManager.SetPlayerName(newPlayerName, (response) =>
+        {
+            if (response.success)
+            {
+                _playerName = newPlayerName;
+                Debug.Log("Successfully set player name");
+                responseName?.Invoke(true);
+            }
+            else
+            {
+                _playerName = newPlayerName;
+                Debug.Log("Error setting player name");
+                responseName?.Invoke(false);
+            }
+        });
+    }
+
+    public static void GetPlayerName (Action<bool> responseName)
+    {
+        LootLockerSDKManager.GetPlayerName((response) =>
+        {
+            if (response.success)
+            {
+                _playerName = response.name;
+                Debug.Log("Successfully retrieved player name: " + response.name);
+                responseName?.Invoke(true);
+            }
+            else
+            {
+                Debug.Log("Error getting player name");
+                responseName?.Invoke(false);
+            }
+        });
+    }
+
+    public static void GetPlayerName()
+    {
+        LootLockerSDKManager.GetPlayerName((response) =>
+        {
+            if (response.success)
+            {
+                _playerName = response.name;
+                Debug.Log("Successfully retrieved player name: " + response.name);
+            }
+            else
+            {
+                Debug.Log("Error getting player name");
+            }
+        });
     }
 
 

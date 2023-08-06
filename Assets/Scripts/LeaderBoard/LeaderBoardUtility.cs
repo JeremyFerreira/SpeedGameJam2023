@@ -2,7 +2,9 @@ using LootLocker;
 using LootLocker.Requests;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public static class LeaderBoardUtility
 {
@@ -93,11 +95,38 @@ public static class LeaderBoardUtility
             if (response.statusCode == 200)
             {
                 Debug.Log("Successful"+ response.items.Length);
-                for(int i = 0; i<response.items.Length;i++)
+
+               // response
+                for (int i = 0; i<response.items.Length;i++)
                 {
-                    listLeader.Add(response.items[i].member_id, response.items[i].score);
+                    int score = response.items[i].score;
+                    listLeader.Add(response.items[i].member_id, score);
                 }
-                toReturn?.Invoke(listLeader);
+
+                Dictionary<string, int> listLeaderName = new Dictionary<string, int>();
+                List<ulong> id = new List<ulong>();
+
+                for (int i = 0; i < listLeader.Count; i++)
+                {
+                    id.Add(ulong.Parse(listLeader.ElementAt(i).Key));
+                }
+
+                LootLockerSDKManager.LookupPlayerNamesByPlayerIds(id.ToArray(), responseName =>
+                {
+                    if (responseName.success)
+                    {
+                        for (int i = 0; i < responseName.players.Length; i++)
+                        {
+                            listLeaderName.Add(responseName.players[i].name, listLeader.ElementAt(i).Value);
+                        }
+
+                        toReturn?.Invoke(listLeaderName);
+                    }
+                    else
+                    {
+                        toReturn?.Invoke(listLeader);
+                    }
+                });
             }
             else
             {
@@ -105,6 +134,13 @@ public static class LeaderBoardUtility
                 toReturn?.Invoke(listLeader);
             }
         });
+
+        
+    }
+
+    private static void AddToDictionnary ()
+    {
+
     }
 
 

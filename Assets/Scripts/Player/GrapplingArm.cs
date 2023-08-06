@@ -72,6 +72,10 @@ public class GrapplingArm : MonoBehaviour
         }
         else
         {
+            if(isGrappling)
+            {
+                _rigidbody.AddForce((new Vector2(shoulderPivot.transform.position.x, shoulderPivot.transform.position.y) - grapplePoint).normalized * 10, ForceMode2D.Impulse);
+            }
             StopGrappling();
         }
     }
@@ -108,6 +112,10 @@ public class GrapplingArm : MonoBehaviour
         grappleRope.enabled = false;
         _springJoint2D.enabled = false;
         _rigidbody.gravityScale = 1;
+
+
+        
+
     }
     private void Update()
     {
@@ -153,6 +161,7 @@ public class GrapplingArm : MonoBehaviour
                     grappleRope.enabled = true;
                     isGrappling = true;
                     nocatchyet = false;
+                    
                 }
             }
             //movingPlatform

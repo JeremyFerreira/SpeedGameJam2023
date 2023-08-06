@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MenuManager : MonoBehaviour
 {
@@ -11,11 +12,23 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject _pausePanel;
 
     [SerializeField] TextMeshProUGUI _timerText;
+    [SerializeField] InputButtonScriptableObject _anyKey;
+    [SerializeField] InputButtonScriptableObject _pauseKey;
+    [SerializeField] InputButtonScriptableObject _resumeKey;
 
-    public void StartGame()
+    private void OnEnable()
     {
+        _anyKey.OnValueChanged += StartGame;
+        InputManager.Instance.ActiveGameInputs(false);
+        _pauseKey.OnValueChanged += Pause;
+    }
+
+    public void StartGame(bool value)
+    {
+        _anyKey.OnValueChanged -= StartGame;
         _startPanel.SetActive(false);
         _gamePanel.SetActive(true);
+        InputManager.Instance.ActiveGameInputs(true);
     }
 
     public void FinishGame()
@@ -24,21 +37,34 @@ public class MenuManager : MonoBehaviour
         _finishPanel.SetActive(true);
     }
 
-    public void Pause()
+    public void Pause(bool value)
     {
-        _pausePanel.SetActive(true);
-        _gamePanel.SetActive(false);
+        if (value)
+        {
+            _pauseKey.OnValueChanged -= Pause;
+            Time.timeScale = 0f;
+            InputManager.Instance.ActiveGameInputs(false);
+            _pausePanel.SetActive(true);
+            _gamePanel.SetActive(false);
+            _resumeKey.OnValueChanged += Resume;
+        }
     }
 
-    public void Resume()
+    public void Resume(bool value)
     {
-        _pausePanel.SetActive(false);
-        _gamePanel.SetActive(true);
+        if (value)
+        {
+            _resumeKey.OnValueChanged -= Resume;
+            Time.timeScale = 1f;
+            _pausePanel.SetActive(false);
+            _gamePanel.SetActive(true);
+            InputManager.Instance.ActiveGameInputs(true);
+            _pauseKey.OnValueChanged += Pause;
+        }
     }
 
     public void UpdateTimer(float time)
     {
         _timerText.text = TimerFormat.FormatTime(time);
     }
-
 }

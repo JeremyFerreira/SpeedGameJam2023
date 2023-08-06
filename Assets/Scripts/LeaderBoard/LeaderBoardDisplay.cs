@@ -90,6 +90,7 @@ public class LeaderBoardDisplay : MonoBehaviour
 
     private void GetLeaderBoard (Dictionary<string, int> newDic)
     {
+        _actionGetLeaderBoard -= GetLeaderBoard;
         _leaderDic = newDic;
         if(_leaderDic == null) { _leaderBoardFailDisplay?.Invoke(); return; }
         SpawnContainer();

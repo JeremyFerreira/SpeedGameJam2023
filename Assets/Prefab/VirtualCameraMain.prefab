@@ -86,10 +86,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Width: 15.15567
-  m_Damping: 0.1
-  m_MinFOV: 65
-  m_MaxFOV: 85
+  m_Width: 16.16334
+  m_Damping: 1
+  m_MinFOV: 80
+  m_MaxFOV: 90
 --- !u!114 &5116796052516777925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _percentSpeed: {fileID: 11400000, guid: a38b197caaaa22e4695b7fa0bfc27f36, type: 2}
-  _lerpSpeed: 0.2
+  _lerpSpeed: 0.1
+  _threshold: 0.1
+  _delay: 1.2
 --- !u!1 &4615855790286249097
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +185,7 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 0.6
+  m_XDamping: 0.1
   m_YDamping: 0.2
   m_ZDamping: 1
   m_TargetMovementOnly: 1
@@ -194,7 +196,7 @@ MonoBehaviour:
   m_DeadZoneHeight: 0.2
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.2
+  m_SoftZoneWidth: 0.15
   m_SoftZoneHeight: 0.3
   m_BiasX: 0
   m_BiasY: 0

@@ -106,10 +106,9 @@ public class LeaderBoardDisplay : MonoBehaviour
             GameObject container = Instantiate(_prefabContainer, _parentContainer);
             ContainerScore containerScore = container.GetComponent<ContainerScore>();
             string playerId = _leaderDic.ElementAt(i).Key.Split('/')[1];
-            Debug.Log(_leaderDic.ElementAt(i).Value);
-            Debug.Log(_leaderDic.ElementAt(i).Value / 100f);
             float time = _leaderDic.ElementAt(i).Value / 100f;
-            containerScore.InitilizeContainerScore(playerId, time.ToString(), (i+1).ToString());
+
+            containerScore.InitilizeContainerScore(playerId, TimerFormat.FormatTime(time), (i+1).ToString());
             containers.Add(container);
         }
         _leaderBoardSuccessDisplay?.Invoke();
@@ -120,12 +119,12 @@ public class LeaderBoardDisplay : MonoBehaviour
         if (!LeaderBoardUtility.IsConnected) { return; }
         
         _panelSubmition.SetActive(true);
-        Debug.Log(LeaderBoardUtility.PlayerName +" EEEEEEEEEEEEEEEEEEEe");
         _textPlayerId.text = LeaderBoardUtility.PlayerName;
 
         float score = Mathf.RoundToInt(Timer.GetTime * 100);
         score /= 100;
-        _textScore.text = score.ToString();
+
+        _textScore.text = TimerFormat.FormatTime(score);
 
     }
 

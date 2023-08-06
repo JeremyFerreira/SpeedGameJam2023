@@ -9,13 +9,17 @@ public class bouncePlayer : MonoBehaviour
     [SerializeField] float resetTimer = 0.05f;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 7 || other.gameObject.layer == 8)
         {
             Vector2 dirToPoint = -(new Vector2(transform.position.x, transform.position.y) - other.ClosestPoint(transform.position)).normalized;
             RaycastHit2D hit;
             hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), dirToPoint, 1000);
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(hit.normal * jumpForce, ForceMode2D.Impulse);
+            if(other.TryGetComponent<Rigidbody2D>(out Rigidbody2D otherRb))
+            {
+                otherRb.AddForceAtPosition(-rb.velocity * jumpForce, hit.point);
+            }
         }
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PercentageSPeed
   m_EditorClassIdentifier: 
   _value: 0
-  _maxValue: 0
+  _maxValue: 100
   defaultValue: 0
-  defaultMaxValue: 0
+  defaultMaxValue: 100

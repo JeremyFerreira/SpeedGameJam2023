@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8995903583343647019}
   - component: {fileID: 3286906931577230460}
   - component: {fileID: 6082895390138073795}
+  - component: {fileID: 5116796052516777925}
   m_Layer: 0
   m_Name: VirtualCameraMain
   m_TagString: Untagged
@@ -85,10 +86,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Width: 100
-  m_Damping: 1
-  m_MinFOV: 80
-  m_MaxFOV: 110
+  m_Width: 15.15567
+  m_Damping: 0.1
+  m_MinFOV: 65
+  m_MaxFOV: 85
+--- !u!114 &5116796052516777925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564660684106509698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7596d3cac36c41e4ab86256ba58077bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _percentSpeed: {fileID: 11400000, guid: a38b197caaaa22e4695b7fa0bfc27f36, type: 2}
+  _lerpSpeed: 0.2
 --- !u!1 &4615855790286249097
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,11 +190,11 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneWidth: 0.08
+  m_DeadZoneHeight: 0.2
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.3
+  m_SoftZoneWidth: 0.2
   m_SoftZoneHeight: 0.3
   m_BiasX: 0
   m_BiasY: 0

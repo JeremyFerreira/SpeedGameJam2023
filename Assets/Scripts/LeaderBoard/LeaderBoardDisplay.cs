@@ -134,9 +134,10 @@ public class LeaderBoardDisplay : MonoBehaviour
         if (LeaderBoardUtility.PlayerName == "") { id = LeaderBoardUtility.PlayerID.ToString(); }
         else { id = LeaderBoardUtility.PlayerName; }//+ random entre 100 et 999; }
         Debug.Log(id);
+        Debug.Log(score);
        
         //Recuper le score
-        LeaderBoardUtility.SubmitToLeaderBoard(id, score, (response) =>
+        LeaderBoardUtility.SubmitToLeaderBoard(LeaderBoardUtility.PlayerID.ToString(), score, (response) =>
         {
             if(response)
             {

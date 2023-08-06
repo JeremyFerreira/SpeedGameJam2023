@@ -112,10 +112,6 @@ public class GrapplingArm : MonoBehaviour
         grappleRope.enabled = false;
         _springJoint2D.enabled = false;
         _rigidbody.gravityScale = 1;
-
-
-        
-
     }
     private void Update()
     {
@@ -132,6 +128,10 @@ public class GrapplingArm : MonoBehaviour
             }
         }
         RotateGun();
+        if(isGrappling && grabPointMoving.transform.parent != null && !grabPointMoving.transform.parent.gameObject.activeSelf)
+        {
+            SetIsGrappling(false);
+        }
     }
     private void FixedUpdate()
     {
@@ -161,7 +161,9 @@ public class GrapplingArm : MonoBehaviour
                     grappleRope.enabled = true;
                     isGrappling = true;
                     nocatchyet = false;
-                    
+                    grabPointMoving.position = _hit.point;
+                    grabPointMoving.parent = _hit.collider.gameObject.transform;
+
                 }
             }
             //movingPlatform

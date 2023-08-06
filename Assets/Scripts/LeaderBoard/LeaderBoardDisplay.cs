@@ -65,11 +65,10 @@ public class LeaderBoardDisplay : MonoBehaviour
     public void ShowLeaderBoard ()
     {
         if (!LeaderBoardUtility.IsConnected) { return; }
-        _parentContainer.gameObject.SetActive(true);
         DestroyAllContainers();
-        _actionGetLeaderBoard += GetLeaderBoard;
+        _parentContainer.gameObject.SetActive(true);
         
-        LeaderBoardUtility.GetLeaderBoard(_actionGetLeaderBoard);
+        
         
     }
 
@@ -77,11 +76,16 @@ public class LeaderBoardDisplay : MonoBehaviour
     {
         if(containers != null)
         {
+            Debug.Log("je detruit EEEEEEEEE");
             for(int i = 0;i <  containers.Count;i++)
             {
                 Destroy(containers[i]);
             }
         }
+
+        _actionGetLeaderBoard += GetLeaderBoard;
+
+        LeaderBoardUtility.GetLeaderBoard(_actionGetLeaderBoard);
     }
 
     private void GetLeaderBoard (Dictionary<string, int> newDic)
@@ -98,9 +102,10 @@ public class LeaderBoardDisplay : MonoBehaviour
         containers = new List<GameObject>();
         for (int i = 0; i< _leaderDic.Count;i++)
         {
-            ContainerScore containerScore = Instantiate(_prefabContainer, _parentContainer).GetComponent<ContainerScore>();
+            GameObject container = Instantiate(_prefabContainer, _parentContainer);
+            ContainerScore containerScore = container.GetComponent<ContainerScore>();
             containerScore.InitilizeContainerScore(_leaderDic.ElementAt(i).Key,_leaderDic.ElementAt(i).Value.ToString(), (i+1).ToString());
-            containers.Add(containerScore.gameObject);
+            containers.Add(container);
         }
         _leaderBoardSuccessDisplay?.Invoke();
     }

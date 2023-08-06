@@ -22,8 +22,10 @@ public class InitializerLookLocker : MonoBehaviour
     {
         if(LeaderBoardUtility.IsConnected)
         {
+            Debug.Log("Session Reussite");
             LeaderBoardUtility.GetPlayerName((response) =>
             {
+                
                 if(response) { _sessionSuccess?.Invoke(); }
                 else { _sessionSuccess?.Invoke(); }
                 

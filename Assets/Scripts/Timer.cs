@@ -4,9 +4,9 @@ using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
-    private float _actualTime;
+    private static float _actualTime;
     public UnityEvent<float> OnValueChange;
-    public float GetTime {  get { return _actualTime; } }
+    public static float GetTime {  get { return _actualTime; } }
 
     private bool _isPlaying;
 

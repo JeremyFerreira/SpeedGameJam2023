@@ -39,34 +39,32 @@ public class MenuManager : MonoBehaviour
 
     public void Pause(bool value)
     {
-        _pauseKey.OnValueChanged-= Pause;
-        Time.timeScale = 0f;
-        InputManager.Instance.ActiveGameInputs(false);
-        _pausePanel.SetActive(true);
-        _gamePanel.SetActive(false);
-        _resumeKey.OnValueChanged += Resume;
+        if (value)
+        {
+            _pauseKey.OnValueChanged -= Pause;
+            Time.timeScale = 0f;
+            InputManager.Instance.ActiveGameInputs(false);
+            _pausePanel.SetActive(true);
+            _gamePanel.SetActive(false);
+            _resumeKey.OnValueChanged += Resume;
+        }
     }
 
     public void Resume(bool value)
     {
-        _resumeKey.OnValueChanged -= Resume;
-        Time.timeScale = 1f;
-        _pausePanel.SetActive(false);
-        _gamePanel.SetActive(true);
-        InputManager.Instance.ActiveGameInputs(true);
-        StartCoroutine(ActiveEventResume());
+        if (value)
+        {
+            _resumeKey.OnValueChanged -= Resume;
+            Time.timeScale = 1f;
+            _pausePanel.SetActive(false);
+            _gamePanel.SetActive(true);
+            InputManager.Instance.ActiveGameInputs(true);
+            _pauseKey.OnValueChanged += Pause;
+        }
     }
 
     public void UpdateTimer(float time)
     {
         _timerText.text = TimerFormat.FormatTime(time);
     }
-
-    IEnumerator ActiveEventResume()
-    {
-        InputManager.Instance.ActiveGameInputs(true);
-        _pauseKey.OnValueChanged += Pause;
-        yield return new WaitForSeconds(.1f);
-    }
-
 }

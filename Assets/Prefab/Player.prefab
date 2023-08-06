@@ -586,7 +586,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 19.635937
+  m_Distance: 27.01185
   m_DampingRatio: 1
   m_Frequency: 1
 --- !u!231 &332699602831236526
@@ -607,7 +607,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 19.635937
+  m_Distance: 27.01185
   m_DampingRatio: 1
   m_Frequency: 100
 --- !u!114 &972061298283413528
@@ -2081,7 +2081,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.65
 --- !u!1 &8415679536798624001
 GameObject:
   m_ObjectHideFlags: 0

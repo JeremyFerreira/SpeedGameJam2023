@@ -20,7 +20,7 @@ public class Paralaxe : MonoBehaviour
         _initialPotion = _intitial.x;// + transform.parent.position.x;
         if (layer == 0)
             layer = 1;
-        
+        layer /= 2;
     }
 
     // Update is called once per frame

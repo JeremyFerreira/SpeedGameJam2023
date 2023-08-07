@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 1.5
+  layer: 1
   _camera: {fileID: 0}
 --- !u!1 &308226710173340713
 GameObject:
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 1.5
+  layer: 1
   _camera: {fileID: 0}
 --- !u!1 &1095833678993159964
 GameObject:
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 3
+  layer: 1.4
   _camera: {fileID: 0}
 --- !u!1 &1325230772852279289
 GameObject:
@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 2.5
+  layer: 1.2
   _camera: {fileID: 0}
 --- !u!1 &1442412952265791851
 GameObject:
@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 2.5
+  layer: 1.2
   _camera: {fileID: 0}
 --- !u!1 &3001365846124371961
 GameObject:
@@ -1971,7 +1971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 2.5
+  layer: 1.2
   _camera: {fileID: 0}
 --- !u!1 &4126868169040365593
 GameObject:
@@ -2649,7 +2649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 3
+  layer: 1.4
   _camera: {fileID: 0}
 --- !u!1 &5744839484788060089
 GameObject:
@@ -2847,7 +2847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 2
+  layer: 1.1
   _camera: {fileID: 0}
 --- !u!1 &6178008104494074101
 GameObject:
@@ -3426,7 +3426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 2
+  layer: 1.1
   _camera: {fileID: 0}
 --- !u!1 &7663684584122143928
 GameObject:
@@ -3624,7 +3624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 3
+  layer: 1.4
   _camera: {fileID: 0}
 --- !u!1 &8257836549011808816
 GameObject:
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 1.3
+  layer: 1
   _camera: {fileID: 0}
 --- !u!1 &8773333907282195692
 GameObject:
@@ -4150,7 +4150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 1.5
+  layer: 1
   _camera: {fileID: 0}
 --- !u!1 &9093266748541220074
 GameObject:
@@ -4348,5 +4348,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d406491fea75534e8c9d28b2e627487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 2
+  layer: 1.1
   _camera: {fileID: 0}

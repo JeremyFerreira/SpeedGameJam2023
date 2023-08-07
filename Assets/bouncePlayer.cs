@@ -23,7 +23,6 @@ public class bouncePlayer : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(hit.normal * jumpForce, ForceMode2D.Impulse);
             gameObjectsCollide.Add(other.gameObject);
-            StartCoroutine(RemoveObject(other));
             Instantiate(particuleBounce, new Vector3(ContactPoint.x,ContactPoint.y, 1), Quaternion.identity);
             sound.PlaySoundEffectRandom(9, 11);
         }
@@ -44,17 +43,8 @@ public class bouncePlayer : MonoBehaviour
                 Instantiate(particuleBounce, new Vector3(ContactPoint.x, ContactPoint.y, 0), Quaternion.identity);
                 sound.PlaySoundEffectRandom(9, 11);
             }
-            StartCoroutine(RemoveObject(other));
         }
         
-    }
-    IEnumerator RemoveObject(Collider2D other)
-    {
-        yield return new WaitForSeconds(0.2f);
-        if (gameObjectsCollide.Contains(other.gameObject))
-        {
-            gameObjectsCollide.Remove(other.gameObject);
-        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {

@@ -14,18 +14,26 @@ public class MenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _timerText;
     [SerializeField] InputButtonScriptableObject _anyKey;
     [SerializeField] InputButtonScriptableObject _pauseKey;
-    [SerializeField] InputButtonScriptableObject _resumeKey;
 
     private void OnEnable()
     {
+        StartCoroutine(activeInputs());
+    }
+    IEnumerator activeInputs()
+    {
+        yield return new WaitForSeconds(0.3f);
         _anyKey.OnValueChanged += StartGame;
-        InputManager.Instance.ActiveGameInputs(false);
         _pauseKey.OnValueChanged += Pause;
+        InputManager.Instance.ActiveGameInputs(false);
+    }
+    private void OnDisable()
+    {
+        _anyKey.OnValueChanged -= StartGame;
+        _pauseKey.OnValueChanged -= Pause;
     }
 
     public void StartGame(bool value)
     {
-        _anyKey.OnValueChanged -= StartGame;
         _startPanel.SetActive(false);
         _gamePanel.SetActive(true);
         InputManager.Instance.ActiveGameInputs(true);
@@ -41,12 +49,10 @@ public class MenuManager : MonoBehaviour
     {
         if (value)
         {
-            _pauseKey.OnValueChanged -= Pause;
             Time.timeScale = 0f;
             InputManager.Instance.ActiveGameInputs(false);
             _pausePanel.SetActive(true);
             _gamePanel.SetActive(false);
-            _resumeKey.OnValueChanged += Resume;
         }
     }
 
@@ -54,12 +60,10 @@ public class MenuManager : MonoBehaviour
     {
         if (value)
         {
-            _resumeKey.OnValueChanged -= Resume;
             Time.timeScale = 1f;
             _pausePanel.SetActive(false);
             _gamePanel.SetActive(true);
             InputManager.Instance.ActiveGameInputs(true);
-            _pauseKey.OnValueChanged += Pause;
         }
     }
 

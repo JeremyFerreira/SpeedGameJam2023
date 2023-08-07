@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GrapplingArm : MonoBehaviour
 {
@@ -59,7 +60,9 @@ public class GrapplingArm : MonoBehaviour
     bool nocatchyet = true;
     private bool inCoroutineNoObject;
     public Transform grabPointMoving;
-    
+    public GameObject particuleGrab;
+    public UnityEvent OnStartGrab;
+    public SoundeffectPlay sound;
 
     void SetIsGrappling( bool value)
     {
@@ -164,6 +167,7 @@ public class GrapplingArm : MonoBehaviour
                     grabPointMoving.position = _hit.point;
                     grabPointMoving.parent = _hit.collider.gameObject.transform;
 
+                    StartCoroutine(LaunchParticule(_hit.point));
                 }
             }
             //movingPlatform
@@ -178,6 +182,8 @@ public class GrapplingArm : MonoBehaviour
                     nocatchyet = false;
                     grabPointMoving.position = _hit.point;
                     grabPointMoving.parent = _hit.collider.gameObject.transform;
+
+                    StartCoroutine(LaunchParticule(_hit.point));
                     StartCoroutine(MovingGrabPoint());
                 }
             }
@@ -227,6 +233,7 @@ public class GrapplingArm : MonoBehaviour
                         hasgrabbed = true;
                         grappleRope.enabled = true;
                         grappleRope.startGrab();
+                        StartCoroutine(LaunchParticule(_hit.point));
                     }
                 }
                 //movingPlatform
@@ -246,6 +253,7 @@ public class GrapplingArm : MonoBehaviour
                         hasgrabbed = true;
                         grappleRope.enabled = true;
                         grappleRope.startGrab();
+                        StartCoroutine(LaunchParticule(_hit.point));
 
                         StartCoroutine(MovingGrabPoint());
                     }
@@ -261,7 +269,15 @@ public class GrapplingArm : MonoBehaviour
         inCoroutineNoObject = false;
 
     }
+    IEnumerator LaunchParticule(Vector2 point)
+    {
+        yield return new WaitForSeconds(0.2f);
+        Instantiate(particuleGrab, new Vector3(point.x, point.y, 1), Quaternion.identity);
+        OnStartGrab?.Invoke();
+        sound.PlaySoundEffectRandom(0, 3);
+        sound.PlaySoundEffectRandom(4, 5);
 
+    }
     public void Grapple()
     {
         if (!nocatchyet)

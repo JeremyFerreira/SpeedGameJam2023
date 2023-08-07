@@ -4013,6 +4013,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 862cf80efb06d5841a50f98873861d0e, type: 3}
   - {fileID: 8300000, guid: 097dfedb571891642b9a93be2008ef44, type: 3}
   - {fileID: 8300000, guid: deddcc893ff7f464288ae0c64232aa67, type: 3}
+  - {fileID: 8300000, guid: ccdc1026f90774226b4c0759093380b3, type: 3}
 --- !u!1 &1125145430
 GameObject:
   m_ObjectHideFlags: 0
@@ -24451,9 +24452,45 @@ PrefabInstance:
       value: Timer
       objectReference: {fileID: 0}
     - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
       propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1330507598}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1076365356}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlaySoundEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: SoundeffectPlay, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099138586174184673, guid: 7b4c9f9b1d84e504fa7ca9d4a33bb8fa, type: 3}
+      propertyPath: OnReachFinish.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

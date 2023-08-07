@@ -29743,6 +29743,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4103065395761138012, guid: b71b782052868514a93b5c7477fbc201, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4306320039583341915, guid: b71b782052868514a93b5c7477fbc201, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

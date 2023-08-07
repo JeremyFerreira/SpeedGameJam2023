@@ -48,6 +48,9 @@ public class LeaderBoardDisplay : MonoBehaviour
     [SerializeField]
     private GameObject _panelNotConnected;
 
+    [SerializeField]
+    private UnityEvent _onLeaderPanelOpen;
+
 
     public void UnShowPanelLeaderBoard ()
     {
@@ -72,9 +75,10 @@ public class LeaderBoardDisplay : MonoBehaviour
 
     public void ShowPanelLeaderBoard (bool showSubmit)
     {
+        _onLeaderPanelOpen?.Invoke();
+        _panelLeaderBoard.SetActive(true);
         if (!LeaderBoardUtility.IsConnected) { ShowPanelNotConnected(); return; }
         UnShowPanelNotConnected();
-        _panelLeaderBoard.SetActive(true);
         if (showSubmit) { ShowSubmitLeaderBoard(); }
         ShowLeaderBoard();
     }

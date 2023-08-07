@@ -17,9 +17,14 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(activeInputs());
+    }
+    IEnumerator activeInputs()
+    {
+        yield return new WaitForSeconds(0.3f);
         _anyKey.OnValueChanged += StartGame;
-        InputManager.Instance.ActiveGameInputs(false);
         _pauseKey.OnValueChanged += Pause;
+        InputManager.Instance.ActiveGameInputs(false);
     }
     private void OnDisable()
     {

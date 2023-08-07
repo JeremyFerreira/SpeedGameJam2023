@@ -51,6 +51,9 @@ public class LeaderBoardDisplay : MonoBehaviour
     [SerializeField]
     private UnityEvent _onLeaderPanelOpen;
 
+    [SerializeField]
+    private MenuManager menuManager;
+
 
     public void UnShowPanelLeaderBoard ()
     {
@@ -77,9 +80,12 @@ public class LeaderBoardDisplay : MonoBehaviour
     {
         _onLeaderPanelOpen?.Invoke();
         _panelLeaderBoard.SetActive(true);
+        Time.timeScale = 0;
         if (!LeaderBoardUtility.IsConnected) { ShowPanelNotConnected(); return; }
         UnShowPanelNotConnected();
-        if (showSubmit) { ShowSubmitLeaderBoard(); }
+        if (showSubmit) { ShowSubmitLeaderBoard();
+            menuManager.enabled = false;
+        }
         ShowLeaderBoard();
     }
 

@@ -45,6 +45,8 @@ public class LeaderBoardDisplay : MonoBehaviour
 
     [SerializeField]
     private GameObject _panelLeaderBoard;
+    [SerializeField]
+    private GameObject _panelNotConnected;
 
 
     public void UnShowPanelLeaderBoard ()
@@ -55,21 +57,38 @@ public class LeaderBoardDisplay : MonoBehaviour
         _parentContainer.gameObject.SetActive(false);
     }
 
+    public void ShowPanelNotConnected ()
+    {
+        UnShowSubmitLeaderBoard();
+        UnShowLeaderBoard();
+        _panelNotConnected.SetActive(true);
+    }
+
+    public void UnShowPanelNotConnected()
+    {
+      
+        _panelNotConnected.SetActive(false);
+    }
+
     public void ShowPanelLeaderBoard (bool showSubmit)
     {
+        if (!LeaderBoardUtility.IsConnected) { ShowPanelNotConnected(); return; }
+        UnShowPanelNotConnected();
         _panelLeaderBoard.SetActive(true);
         if (showSubmit) { ShowSubmitLeaderBoard(); }
         ShowLeaderBoard();
     }
 
+    public void UnShowLeaderBoard ()
+    {
+        _parentContainer.gameObject.SetActive(false);
+    }
+
     public void ShowLeaderBoard ()
     {
-        if (!LeaderBoardUtility.IsConnected) { return; }
+        if (!LeaderBoardUtility.IsConnected) { ShowPanelNotConnected(); return; }
         DestroyAllContainers();
         _parentContainer.gameObject.SetActive(true);
-        
-        
-        
     }
 
     private void DestroyAllContainers ()

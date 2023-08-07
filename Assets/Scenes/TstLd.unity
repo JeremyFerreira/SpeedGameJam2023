@@ -482,7 +482,7 @@ Transform:
   m_GameObject: {fileID: 420883748}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.1, y: -60.7, z: -10}
+  m_LocalPosition: {x: 50.4, y: 12.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -588,11 +588,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5949368312905024349, guid: dda4ce65c57709c49a9b7345a72403e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.1
+      value: 50.4
       objectReference: {fileID: 0}
     - target: {fileID: 5949368312905024349, guid: dda4ce65c57709c49a9b7345a72403e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -60.7
+      value: 12.6
       objectReference: {fileID: 0}
     - target: {fileID: 5949368312905024349, guid: dda4ce65c57709c49a9b7345a72403e6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -669,11 +669,11 @@ PrefabInstance:
       objectReference: {fileID: 429466359}
     - target: {fileID: 8995903583343647019, guid: cb0d97133fbe90748beba1376abad974, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.1
+      value: 50.4
       objectReference: {fileID: 0}
     - target: {fileID: 8995903583343647019, guid: cb0d97133fbe90748beba1376abad974, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -60.7
+      value: 12.6
       objectReference: {fileID: 0}
     - target: {fileID: 8995903583343647019, guid: cb0d97133fbe90748beba1376abad974, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1352,6 +1352,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSalleDeBain
       objectReference: {fileID: 0}
+    - target: {fileID: 8061221822574114173, guid: a4090c233339a9047b87e4963d742975, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8408008750915176787, guid: a4090c233339a9047b87e4963d742975, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9730263
@@ -1741,6 +1745,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 820088011010693010, guid: a187f99d4c6927145aa1e71b3f17c686, type: 3}
   m_PrefabInstance: {fileID: 4370963080075915349}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5077914914250685071
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203203970812573369, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2865880940805756022, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
+      propertyPath: m_Name
+      value: LevelSalonHotel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 54379f9b67443bd4b9c13d95b8c21594, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1748,3 +1809,4 @@ SceneRoots:
   - {fileID: 1585292409}
   - {fileID: 435896080350731746}
   - {fileID: 82599409}
+  - {fileID: 5077914914250685071}

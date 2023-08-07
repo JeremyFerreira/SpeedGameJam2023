@@ -24,25 +24,17 @@ public class TriggerSetActiveGameObjects : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(!hasDone)
+        if (collision.gameObject.layer == 6)
         {
-            if (collision.gameObject.layer == 6)
+            for (int i = 0; i < ActiveObjects.Count; i++)
             {
-                for (int i = 0; i < ActiveObjects.Count; i++)
-                {
-                    ActiveObjects[i].SetActive(true);
-                }
-                for (int i = 0; i < DisactiveObjects.Count; i++)
-                {
-                    DisactiveObjects[i].SetActive(false);
-                }
-                hasDone = true;
+                ActiveObjects[i].SetActive(true);
             }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!hasDone)
+        if (hasDone)
         {
             if (collision.gameObject.layer == 6)
             {

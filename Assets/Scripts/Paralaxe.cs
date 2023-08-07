@@ -26,6 +26,7 @@ public class Paralaxe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_camera == null) { return; }
         Vector3 Position = _camera.transform.position;
         float Temp = Position.x * (1 - layer);
         float Distance = Position.x * layer;
